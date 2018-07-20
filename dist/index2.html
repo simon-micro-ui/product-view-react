@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Webcomponents</title>
+
+    <!-- HTML Import for the React Webcomponent -->
+    <link rel="import" href="hello-world.html">
+
+    <!-- N.B. This has to go after the HTML import, otherwise the WebComponentsReady event is triggered too early, and the
+         component does not render -->
+    <script src="lib/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="lib/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+    <script>
+        window.addEventListener("WebComponentsReady", function ( event ) {
+            console.log('WebComponentsReady event was fired (by webcomponents-loader.js)')
+        } )
+    </script>
+</head>
+<body>
+<hello-world></hello-world>
+<hello-world></hello-world>
+</body>
+</html>
