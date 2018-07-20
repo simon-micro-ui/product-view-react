@@ -20,7 +20,7 @@ class App extends Component {
     const { flowerText } = this.state;
     return(
       <div id="appRoot">
-        <Block color="red" text="Red Rose Updated" changeText={changeText} />
+        <Block color="red" text="Red Rose" changeText={changeText} />
         <Block color="blue" text="Blue Iris" changeText={changeText} />
         <div id="appRoot__flower">{flowerText}</div>
       </div>
