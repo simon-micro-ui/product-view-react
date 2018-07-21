@@ -25,7 +25,7 @@ module.exports = env => {
           test: /\.css$/,
           use: ExtractTextPlugin.extract({
             fallback: "style-loader",
-            use: "css-loader"
+            use: "url-loader?limit=100000"
           })
         },
       ],
@@ -44,8 +44,6 @@ module.exports = env => {
       new StyleExtHtmlWebpackPlugin(),
       new CopyWebpackPlugin([
           { from: 'public/index.html', to: 'index.html' },
-
-
 
           { from: 'node_modules/@webcomponents/custom-elements/custom-elements.min.js', to: 'lib/custom-elements/custom-elements.min.js' },
           { from: 'node_modules/@webcomponents/custom-elements/src/native-shim.js', to: 'lib/custom-elements/native-shim.js' },

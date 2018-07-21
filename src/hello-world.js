@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import retargetEvents from 'react-shadow-dom-retarget-events';
-import App from './App';
+import App from './App/app';
 
 (function() {
   const thisDocument = document.currentScript.ownerDocument;

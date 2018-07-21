@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Cart from './Cart';
-import './index.css';
+import Cart from './Cart/cart';
+import './app.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
