@@ -45,7 +45,7 @@ module.exports = env => {
       new CopyWebpackPlugin([
           { from: 'public/index.html', to: 'index.html' },
 
-          { from: 'node_modules/document-register-element/build/document-register-element.js', to: 'lib/document-register-element.js' },
+
 
           { from: 'node_modules/@webcomponents/custom-elements/custom-elements.min.js', to: 'lib/custom-elements/custom-elements.min.js' },
           { from: 'node_modules/@webcomponents/custom-elements/src/native-shim.js', to: 'lib/custom-elements/native-shim.js' },
