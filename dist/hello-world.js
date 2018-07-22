@@ -21103,7 +21103,7 @@ function getNativeEventName(reactEventName) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -21128,28 +21128,66 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var App = function (_Component) {
-  _inherits(App, _Component);
+var App = function (_React$Component) {
+    _inherits(App, _React$Component);
 
-  function App(props) {
-    _classCallCheck(this, App);
+    function App(props) {
+        _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
-  }
+        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-  _createClass(App, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { id: 'appRoot' },
-        _react2.default.createElement(_cart2.default, null)
-      );
+        _this.products = [{
+            productname: "JBL Flip 4",
+            code: "cat1-0001",
+            price: 18.01,
+            cartprice: 0,
+            available: 10,
+            qty: 0
+        }, {
+            productname: "Bose Sound Link",
+            code: "cat1-0010",
+            price: 129.05,
+            cartprice: 0,
+            available: 9,
+            qty: 0
+        }, {
+            productname: "AB Portable",
+            code: "cat1-0008",
+            price: 19.78,
+            cartprice: 0,
+            available: 11,
+            qty: 0
+        }, {
+            productname: "AE-9 Portable",
+            code: "cat1-0011",
+            price: 299.99,
+            cartprice: 0,
+            available: 8,
+            qty: 0
+        }, {
+            productname: "JBL Pulse 3",
+            code: "cat1-0009",
+            price: 23.05,
+            cartprice: 0,
+            available: 10,
+            qty: 0
+        }];
+        return _this;
     }
-  }]);
 
-  return App;
-}(_react.Component);
+    _createClass(App, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { id: 'appRoot' },
+                _react2.default.createElement(_cart2.default, { products: this.products })
+            );
+        }
+    }]);
+
+    return App;
+}(_react2.default.Component);
 
 exports.default = App;
 
@@ -21185,10 +21223,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Cart = function (_React$Component) {
     _inherits(Cart, _React$Component);
 
-    function Cart() {
+    function Cart(props) {
         _classCallCheck(this, Cart);
 
-        return _possibleConstructorReturn(this, (Cart.__proto__ || Object.getPrototypeOf(Cart)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Cart.__proto__ || Object.getPrototypeOf(Cart)).call(this, props));
+
+        _this.products = props.products;
+        console.log("First Product=" + _this.products[0]);
+        return _this;
     }
 
     _createClass(Cart, [{
@@ -21196,7 +21238,7 @@ var Cart = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { id: 'cart', className: 'col-sm-7' },
+                { className: 'col-sm-7' },
                 _react2.default.createElement(
                     'div',
                     { className: 'panel panel-primary' },
@@ -21246,39 +21288,10 @@ var Cart = function (_React$Component) {
                                 _react2.default.createElement(
                                     'tbody',
                                     null,
-                                    _react2.default.createElement(
-                                        'tr',
-                                        null,
-                                        _react2.default.createElement(
-                                            'td',
-                                            null,
-                                            'product.productname'
-                                        ),
-                                        _react2.default.createElement(
-                                            'td',
-                                            null,
-                                            'product.code'
-                                        ),
-                                        _react2.default.createElement(
-                                            'td',
-                                            null,
-                                            'product.price'
-                                        ),
-                                        _react2.default.createElement(
-                                            'td',
-                                            null,
-                                            'product.available'
-                                        ),
-                                        _react2.default.createElement(
-                                            'td',
-                                            null,
-                                            _react2.default.createElement(
-                                                'a',
-                                                { className: 'btn btn-primary' },
-                                                'Add'
-                                            )
-                                        )
-                                    )
+                                    this.products.map(function (product, index) {
+                                        console.log("productname=" + product.productname);
+                                        return _react2.default.createElement(ProductItem, { product: product, index: index });
+                                    })
                                 )
                             )
                         )
@@ -21292,6 +21305,63 @@ var Cart = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Cart;
+
+var ProductItem = function (_React$Component2) {
+    _inherits(ProductItem, _React$Component2);
+
+    function ProductItem(props) {
+        _classCallCheck(this, ProductItem);
+
+        var _this2 = _possibleConstructorReturn(this, (ProductItem.__proto__ || Object.getPrototypeOf(ProductItem)).call(this, props));
+
+        console.log("product=" + props.product.productname);
+        console.log("index=" + props.index);
+        _this2.product = props.product;
+        _this2.index = props.index;
+        return _this2;
+    }
+
+    _createClass(ProductItem, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'tr',
+                { key: this.index },
+                _react2.default.createElement(
+                    'td',
+                    null,
+                    this.product.productname
+                ),
+                _react2.default.createElement(
+                    'td',
+                    null,
+                    this.product.code
+                ),
+                _react2.default.createElement(
+                    'td',
+                    null,
+                    this.product.price
+                ),
+                _react2.default.createElement(
+                    'td',
+                    null,
+                    this.product.available
+                ),
+                _react2.default.createElement(
+                    'td',
+                    null,
+                    _react2.default.createElement(
+                        'a',
+                        { className: 'btn btn-primary' },
+                        'Add'
+                    )
+                )
+            );
+        }
+    }]);
+
+    return ProductItem;
+}(_react2.default.Component);
 
 /***/ }),
 /* 35 */
