@@ -46,19 +46,38 @@ class ProductItem extends React.Component {
     constructor(props) {
         super(props);
         console.log("product=" + props.product.productname);
-        console.log("index=" + props.index);
+        console.log("index2=" + props.index);
         this.product = props.product;
         this.index = props.index;
     }
+
+    addToCart(product) {
+        console.log("buying " + product.productname);
+        if (product.qty === product.available) {
+            console.log("Product is out of Stock.");
+        } else {
+            this.product.qty = this.product.qty + 1;
+            const productcartele = document.querySelector("product-cart");
+            if (productcartele != null) {
+                productcartele["message"] = product;
+            }
+        }
+    }
+
     render() {
         return (
-            <tr key={this.index}>
+            <tr>
                 <td>{this.product.productname}</td>
                 <td>{this.product.code}</td>
                 <td>{this.product.price}</td>
                 <td>{this.product.available}</td>
                 <td>
-                    <a className="btn btn-primary">Add</a>
+                    <a
+                        className="btn btn-primary"
+                        onClick={() => this.addToCart(this.product)}
+                    >
+                        Add
+                    </a>
                 </td>
             </tr>
         );
