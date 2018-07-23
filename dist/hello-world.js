@@ -21112,9 +21112,9 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _cart = __webpack_require__(34);
+var _productView = __webpack_require__(34);
 
-var _cart2 = _interopRequireDefault(_cart);
+var _productView2 = _interopRequireDefault(_productView);
 
 __webpack_require__(36);
 
@@ -21181,7 +21181,7 @@ var App = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 { id: 'appRoot' },
-                _react2.default.createElement(_cart2.default, { products: this.products })
+                _react2.default.createElement(_productView2.default, { products: this.products })
             );
         }
     }]);
@@ -21220,20 +21220,20 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Cart = function (_React$Component) {
-    _inherits(Cart, _React$Component);
+var ProductView = function (_React$Component) {
+    _inherits(ProductView, _React$Component);
 
-    function Cart(props) {
-        _classCallCheck(this, Cart);
+    function ProductView(props) {
+        _classCallCheck(this, ProductView);
 
-        var _this = _possibleConstructorReturn(this, (Cart.__proto__ || Object.getPrototypeOf(Cart)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (ProductView.__proto__ || Object.getPrototypeOf(ProductView)).call(this, props));
 
         _this.products = props.products;
         console.log("First Product=" + _this.products[0]);
         return _this;
     }
 
-    _createClass(Cart, [{
+    _createClass(ProductView, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
             console.log('>>> componentDidMount');
@@ -21307,7 +21307,7 @@ var Cart = function (_React$Component) {
                                     null,
                                     this.products.map(function (product, index) {
                                         console.log("productname=" + product.productname);
-                                        return _react2.default.createElement(ProductItem, { product: product, index: index });
+                                        return _react2.default.createElement(ProductItem, { product: product, index: index, key: product.productname });
                                     })
                                 )
                             )
@@ -21318,10 +21318,10 @@ var Cart = function (_React$Component) {
         }
     }]);
 
-    return Cart;
+    return ProductView;
 }(_react2.default.Component);
 
-exports.default = Cart;
+exports.default = ProductView;
 
 var ProductItem = function (_React$Component2) {
     _inherits(ProductItem, _React$Component2);
@@ -21331,8 +21331,7 @@ var ProductItem = function (_React$Component2) {
 
         var _this2 = _possibleConstructorReturn(this, (ProductItem.__proto__ || Object.getPrototypeOf(ProductItem)).call(this, props));
 
-        console.log("product=" + props.product.productname);
-        console.log("index2=" + props.index);
+        console.log("product=" + props.product.productname + ", index=" + props.index);
         _this2.product = props.product;
         _this2.index = props.index;
 
@@ -21343,7 +21342,7 @@ var ProductItem = function (_React$Component2) {
     _createClass(ProductItem, [{
         key: 'addToCart',
         value: function addToCart(product) {
-            console.log("buying " + product.productname);
+            console.log("Adding " + product.productname + " to the Cart...");
             if (product.available <= 0) {
                 var message = "Product is out of Stock.";
                 console.log(message);

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import Cart from './Cart/cart';
+import ProductView from './ProductView/product-view';
 import './app.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
+
     constructor(props) {
         super(props);
         this.products = [
@@ -53,7 +54,7 @@ class App extends React.Component {
     render() {
         return (
             <div id="appRoot">
-                <Cart products={this.products} />
+                <ProductView products={this.products} />
             </div>
         );
     }

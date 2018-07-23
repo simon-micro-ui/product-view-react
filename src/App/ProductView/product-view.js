@@ -1,8 +1,9 @@
 import React from 'react';
-import './cart.css';
+import './product-view.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-class Cart extends React.Component {
+class ProductView extends React.Component {
+
     constructor(props) {
         super(props);
         this.products = props.products;
@@ -45,7 +46,7 @@ class Cart extends React.Component {
                                 <tbody>
                                 {this.products.map(function(product, index) {
                                     console.log("productname=" + product.productname);
-                                    return <ProductItem product={product} index={index} />;
+                                    return <ProductItem product={product} index={index} key={product.productname} />;
                                 })}
                                 </tbody>
                             </table>
@@ -56,13 +57,13 @@ class Cart extends React.Component {
         );
     }
 }
-export default Cart;
+export default ProductView;
 
 class ProductItem extends React.Component {
+
     constructor(props) {
         super(props);
-        console.log("product=" + props.product.productname);
-        console.log("index2=" + props.index);
+        console.log("product=" + props.product.productname + ", index=" + props.index);
         this.product = props.product;
         this.index = props.index;
 
@@ -70,7 +71,7 @@ class ProductItem extends React.Component {
     }
 
     addToCart(product) {
-        console.log("buying " + product.productname);
+        console.log("Adding " + product.productname + " to the Cart...");
         if (product.available <= 0) {
             let message = "Product is out of Stock.";
             console.log(message);
