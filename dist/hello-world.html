@@ -21248,6 +21248,23 @@ var Cart = function (_React$Component) {
     }
 
     _createClass(Cart, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            console.log('>>> componentDidMount');
+
+            // Listen for the event.
+            document.addEventListener('product/bought', function (ev) {
+                console.log("Event received : product=" + JSON.stringify(ev.detail));
+            }, false);
+
+            console.log('<<< componentDidMount');
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            console.log('>>> componentWillUnmount <<<');
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -21329,18 +21346,45 @@ var ProductItem = function (_React$Component2) {
         var _this2 = _possibleConstructorReturn(this, (ProductItem.__proto__ || Object.getPrototypeOf(ProductItem)).call(this, props));
 
         console.log("product=" + props.product.productname);
-        console.log("index=" + props.index);
+        console.log("index2=" + props.index);
         _this2.product = props.product;
         _this2.index = props.index;
+
+        _this2.state = props.product;
         return _this2;
     }
 
     _createClass(ProductItem, [{
+        key: 'addToCart',
+        value: function addToCart(product) {
+            console.log("buying " + product.productname);
+            if (product.available <= 0) {
+                var message = "Product is out of Stock.";
+                console.log(message);
+                alert(message);
+            } else {
+                this.product.qty = this.product.qty + 1;
+                this.product.available = this.product.available - 1;
+                console.log("Product quantity : bought=" + this.product.qty + ", remaining=" + this.product.available);
+                this.setState(this.product);
+
+                var event = new CustomEvent('product/bought', { detail: this.product });
+                document.dispatchEvent(event);
+                console.log("Event dispatched ok...");
+                //const productcartele = document.querySelector("product-cart");
+                //if (productcartele != null) {
+                //    productcartele["message"] = product;
+                //}
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var _this3 = this;
+
             return _react2.default.createElement(
                 'tr',
-                { key: this.index },
+                null,
                 _react2.default.createElement(
                     'td',
                     null,
@@ -21366,7 +21410,12 @@ var ProductItem = function (_React$Component2) {
                     null,
                     _react2.default.createElement(
                         'a',
-                        { className: 'btn btn-primary' },
+                        {
+                            className: 'btn btn-primary',
+                            onClick: function onClick() {
+                                return _this3.addToCart(_this3.product);
+                            }
+                        },
                         'Add'
                     )
                 )

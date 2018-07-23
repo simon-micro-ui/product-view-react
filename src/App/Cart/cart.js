@@ -9,6 +9,22 @@ class Cart extends React.Component {
         console.log("First Product=" + this.products[0]);
     }
 
+    componentDidMount() {
+        console.log('>>> componentDidMount');
+
+        // Listen for the event.
+        document.addEventListener('product/bought',
+            function (ev) {
+                console.log("Event received : product=" + JSON.stringify(ev.detail));
+            }, false);
+
+        console.log('<<< componentDidMount');
+    }
+
+    componentWillUnmount() {
+        console.log('>>> componentWillUnmount <<<');
+    }
+
     render() {
         return (
             <div className="col-sm-7">
@@ -49,18 +65,29 @@ class ProductItem extends React.Component {
         console.log("index2=" + props.index);
         this.product = props.product;
         this.index = props.index;
+
+        this.state = props.product;
     }
 
     addToCart(product) {
         console.log("buying " + product.productname);
-        if (product.qty === product.available) {
-            console.log("Product is out of Stock.");
+        if (product.available <= 0) {
+            let message = "Product is out of Stock.";
+            console.log(message);
+            alert(message);
         } else {
             this.product.qty = this.product.qty + 1;
-            const productcartele = document.querySelector("product-cart");
-            if (productcartele != null) {
-                productcartele["message"] = product;
-            }
+            this.product.available = this.product.available - 1;
+            console.log("Product quantity : bought=" + this.product.qty + ", remaining=" + this.product.available);
+            this.setState(this.product);
+
+            var event = new CustomEvent('product/bought', { detail: this.product });
+            document.dispatchEvent(event);
+            console.log("Event dispatched ok...");
+            //const productcartele = document.querySelector("product-cart");
+            //if (productcartele != null) {
+            //    productcartele["message"] = product;
+            //}
         }
     }
 
