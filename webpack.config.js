@@ -31,6 +31,9 @@ module.exports = env => {
       ],
     },
     plugins: [
+      //new UglifyJSPlugin({
+      //  test: /\.js($|\?)/i
+      //}),
       new HtmlWebpackPlugin({
         template: path.join(__dirname, 'public', 'hello-world.html'),
         filename: 'hello-world.html',
